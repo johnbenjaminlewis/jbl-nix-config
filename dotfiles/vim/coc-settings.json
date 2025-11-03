@@ -1,0 +1,65 @@
+{
+  "python": {
+    "jediEnabled": true,
+    "setInterpreter": "~/.pyenv/shims/python"
+  },
+
+  // Require .prettierrc
+  "prettier": {
+      "requireConfig": true
+  },
+
+  "tslint": {
+    "enable": true,
+    "autoFixOnSave": true
+  },
+
+  // Run prettier (and others)
+  "coc.preferences": {
+    "jumpCommand": "tabedit",
+    "formatOnSaveFiletypes": [
+        "css",
+        "markdown",
+        "Markdown",
+        "javascript",
+        "javascriptreact"
+    ],
+  },
+
+  "languageserver": {
+    "nix": {
+      "command": "nil",
+      "filetypes": ["nix"],
+      "rootPatterns":  ["flake.nix"],
+    },
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ],
+      "settings": {
+        "languageServerHaskell": {
+          "hlintOn": true,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
+      },
+      "initializationOptions": {
+        "languageServerHaskell": {
+          "hlintOn": true,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
+      }
+    }
+  }
+}
