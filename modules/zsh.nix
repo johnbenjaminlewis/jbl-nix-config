@@ -10,6 +10,8 @@ in
         zsh
       ];
 
+      home.file.".functions".source = ../dotfiles/functions;
+
       programs.zsh = {
         enable = true;
         enableCompletion = true;

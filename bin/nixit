@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# A simple wrapper command for common system configuration tasks.
+ROOT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
+source "$ROOT_DIR/bin/_shared.sh"
+
+# --- Usage Function ---
+usage() {
+    echo "
+Usage: $0 <command>
+
+Nixit is a simple tool to manage system configuration and switching.
+
+Project Location:
+  $ROOT_DIR
+
+Available Commands:
+  edit      Opens flake for this host using Vim.
+  switch    Runs 'darwin-rebuild switch' to apply new system configuration.
+"
+}
+
+# --- Main Logic ---
+
+# Check if a command was provided
+if [ -z "$1" ]; then
+    usage
+    exit 1
+fi
+
+COMMAND="$1"
+
+case "$COMMAND" in
+    edit)
+        echo "--> Launching Vim to edit: $CONFIG_FILE"
+        # The 'exec' command replaces the current shell process with vim
+        exec vim "$HOST_FLAKE_DIR/flake.nix"
+        ;;
+    switch)
+        echo "--> Running system rebuild to switch configuration (requires sudo, usually)..."
+        # Execute the system switch command
+        cd "$ROOT_DIR"
+        make build
+        ;;
+    *)
+        echo "Error: Unknown command '$COMMAND'."
+        usage
+        exit 1
+        ;;
+esac

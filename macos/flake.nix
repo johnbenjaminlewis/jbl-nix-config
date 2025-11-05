@@ -66,6 +66,7 @@
               "${self}/../modules/base-system.nix"
               "${self}/../modules/git.nix"
               "${self}/../modules/home.nix"
+              "${self}/../modules/iterm2.nix"
               "${self}/../modules/packages.nix"
               "${self}/../modules/zsh.nix"
             ] ++ myconfig.extraSystemModules;

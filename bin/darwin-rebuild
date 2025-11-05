@@ -2,14 +2,12 @@
 set -eo pipefail
 
 ROOT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/.."
-HOSTNAME="$(hostname | sed 's/\.local$//')"
+source "$ROOT_DIR/bin/_shared.sh"
 
-_flake="$ROOT_DIR/hosts/$HOSTNAME"
-
-if [ ! -f "$_flake/flake.nix" ]; then
+if [ ! -f "$HOST_FLAKE_DIR/flake.nix" ]; then
     echo "Error: You have not written a flake for hostname='$HOSTNAME'."
-    echo "Please create a flake in '$_flake'"
+    echo "Please create a flake in '$HOST_FLAKE_DIR'"
     exit 1
 fi
 
-exec darwin-rebuild switch --flake "$_flake"
+exec darwin-rebuild switch --flake "$HOST_FLAKE_DIR"

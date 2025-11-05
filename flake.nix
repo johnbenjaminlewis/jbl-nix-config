@@ -1,8 +1,5 @@
 {
-  description = ''
-    This Flake is only for repo-related nix commands, it isn't meant to be consumed
-    directly.
-    '';
+  description = "My Base Flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";

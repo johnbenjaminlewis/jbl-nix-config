@@ -116,6 +116,9 @@ run_all() {
     if silence which pyenv; then
         eval "$(pyenv init --path)"
     fi
+
+    # My custom scripts
+    path_append_front ~/bin
 }
 
 # Main runner

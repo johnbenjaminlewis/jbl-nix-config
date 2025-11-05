@@ -34,7 +34,21 @@ as an input:
 
   };
 
-  outputs = { self, nixpkgs, my-darwin-config }: {
+  outputs = { self, nixpkgs, my-darwin-config }:
+  let
+
+    # you may write your custom module inline
+    customizationModule = ({ pkgs, ... }: {
+      home-manager.users.${user.username}.home.packages = with pkgs; [
+        nodejs_24
+      ];
+      homebrew.casks = [
+        "utm"  # virtual machine
+      ];
+    });
+
+  in
+  {
 
       darwinConfigurations."my-macbook" = my-darwin-config.lib.mkHost {
         # --- User Configuration ---
@@ -54,7 +68,8 @@ as an input:
         # --- Custom Modules ---
         # Pass in your own nix-darwin modules
         extraSystemModules = [
-          ./my-system-settings.nix
+          ./my-system-settings.nix  # you may refer to an external custom module
+          customizationModule
         ];
 
         # Pass in your own home-manager modules

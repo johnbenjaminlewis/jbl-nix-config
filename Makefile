@@ -1,5 +1,9 @@
 .PHONY: init
 init:
+	./bin/install-dependencies.sh
+
+.PHONY: install
+install: init
 	./bin/install.sh
 
 .PHONY: build
